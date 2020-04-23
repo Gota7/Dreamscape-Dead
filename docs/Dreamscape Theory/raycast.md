@@ -1,0 +1,2 @@
+# Raycast
+A raycast is a fundamental part of any collision detection system. It is the "eye" of the game. It can see what objects are in front of it, and have the game respond accordingly. This has great use for collision detection and AI.
