@@ -8,11 +8,13 @@ Here is an example with what we are dealing with:
 # The Algorithm
 This one is pretty straightforward, just subtract from the position vector of the point the vector for the origin of the raycast.
 
-Then get the slope of that resulting vector (Y / X component) and compare it to the slope of the raycast. If the raycast's slope matches, then that point is within the `Span { raycast }`, and that vector that represents it is that vector calculated earlier.
+Then get the slope of that resulting vector (Y / X component) and compare it to the slope of the raycast.
+If the raycast's slope matches, then that point is within the `Span { raycast }`, and that vector that represents it is that vector calculated earlier.
 
 If the slopes do not match, then the raycast does not hit that point.
 
-Note, there is a catch here. A raycast vector moving in the complete opposite direction still includes the point in its span. To prevent this, an additional check must be made to see if the signs of the X and Y components of the raycast vector and the calculated vector match.
+Note, there is a catch here. A raycast vector moving in the complete opposite direction still includes the point in its span.
+To prevent this, an additional check must be made to see if the signs of the X and Y components of the raycast vector and the calculated vector match.
 
 # Example
 Here is an example of the algorithm in use:

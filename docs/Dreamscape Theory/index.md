@@ -6,4 +6,6 @@ Everyone that has attempted to make a decent collision system before will know t
 
 [Raycast](raycast.md) - Describes a raycast and why it's so important.
 
+[Raycast & Point](raycastPoint.md) - Raycast intersecting point implementation.
+
 [Raycast & Line](raycastLine.md) - Raycast intersecting line implementation.
