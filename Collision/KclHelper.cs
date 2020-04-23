@@ -38,9 +38,9 @@ namespace Dreamscape.Collision {
             }
 
             //Easy exit if the raycast lands on a point.
-            if (slopeA == raycastSlope) {
+            if (slopeA == raycastSlope && aCast.X.Sign() == raycastDirection.X.Sign() && aCast.Y.Sign() == raycastDirection.Y.Sign()) {
                 return aCast;
-            } else if (slopeB == raycastSlope) {
+            } else if (slopeB == raycastSlope && bCast.X.Sign() == raycastDirection.X.Sign() && bCast.Y.Sign() == raycastDirection.Y.Sign()) {
                 return bCast;
             }
 
@@ -57,6 +57,9 @@ namespace Dreamscape.Collision {
             //Solve the matrix.
             Vector<float> input = Vector<float>.Build.DenseOfArray(new float[] { a.X - raycastOrigin.X, a.Y - raycastOrigin.Y });
             var solution = m.Solve(input);
+
+            //Solution must not be negative!
+            if (solution[0] < 0) { return null; }
 
             //Return the solution, which is the solved weight for the raycast times the raycast.
             return solution[0] * raycastDirection;

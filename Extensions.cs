@@ -54,6 +54,21 @@ namespace Dreamscape {
         }
 
         /// <summary>
+        /// Get the sign of the number.
+        /// </summary>
+        /// <param name="f">The float.</param>
+        /// <returns>The sign.</returns>
+        public static Sign Sign(this float f) {
+            if (f > 0) {
+                return Dreamscape.Sign.Positive;
+            } else if (f < 0) {
+                return Dreamscape.Sign.Negative;
+            } else {
+                return Dreamscape.Sign.None;
+            }
+        }
+
+        /// <summary>
         /// Get the direction of a vector.
         /// </summary>
         /// <param name="v">The vector.</param>
@@ -159,6 +174,15 @@ namespace Dreamscape {
 
         }
 
+    }
+
+    /// <summary>
+    /// Sign.
+    /// </summary>
+    public enum Sign {
+        Positive,
+        Negative,
+        None
     }
 
 }
