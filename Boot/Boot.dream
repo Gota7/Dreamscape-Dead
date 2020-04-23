@@ -1,0 +1,12 @@
+LoadSound Boot Boot/Dreamscape.ogg
+LoadDrawing Boot Boot/Dreamscape.png true
+UnfadeDrawing Boot 1500
+MaximizeDrawing Boot true
+ShowDrawing Boot
+Wait 1100
+PlaySound Boot
+Wait 800
+FadeDrawing Boot 1500
+Wait 1500
+UnloadSound Boot
+ChangeScene Default
