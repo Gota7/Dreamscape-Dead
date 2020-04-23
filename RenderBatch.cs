@@ -48,6 +48,9 @@ namespace Dreamscape {
                 RenderTargetPtr = RTs.IndexOf(n);
             } else {
                 e.Initialize(new RenderBatchEntryParameters(sortMode, blendState, samplerState, depthStencilState, rasterizerState, effect, transformMatrix));
+                if (e.RenderTarget.IsDisposed) {
+                    e.RenderTarget = new RenderTarget2D(GameHelper.Graphics, width, height);
+                }
                 RenderTargetPtr = RTs.IndexOf(e);
             }
         }
@@ -170,11 +173,13 @@ namespace Dreamscape {
         /// <param name="scale">Scaling of the drawing.</param>
         /// <param name="spriteEffects">Sprite effects.</param>
         /// <param name="layerDepth">Depth to draw at.</param>
-        public void End(float x = 0, float y = 0, bool ignoreCamera = false, Color? color = null, Vector2? origin = null, Angle rotation = null, Vector2? scale = null, SpriteEffects spriteEffects = SpriteEffects.None, float layerDepth = 0) {
+        public RenderTarget2D End(float x = 0, float y = 0, bool ignoreCamera = false, Color? color = null, Vector2? origin = null, Angle rotation = null, Vector2? scale = null, SpriteEffects spriteEffects = SpriteEffects.None, float layerDepth = 0) {
             if (RenderTargetPtr != -1 && RT != null && RT.RenderTarget != null) {
                 GameHelper.SpriteBatch.Draw(RT.RenderTarget, new Vector2(x, y), null, null, origin, rotation == null ? 0 : (float)rotation.Radians, scale, color, spriteEffects, layerDepth);
+                return RT.RenderTarget;
+            } else {
+                return null;
             }
-            RenderTargetPtr = -1;
         }
 
         /// <summary>
@@ -188,11 +193,11 @@ namespace Dreamscape {
             }
 
             //Remove unused entries.
-            foreach (var r in RTs) {
-                if (!r.Used) {
-                    RTs.RecycleObject(r);
+            for (int i = RTs.Count() - 1; i >= 0; i--) {
+                if (!RTs.ElementAt(i).Used) {
+                    RTs.RecycleObject(RTs.ElementAt(i));
                 } else {
-                    r.Used = false;
+                    RTs.ElementAt(i).Used = false;
                 }
             }
 

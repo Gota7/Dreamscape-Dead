@@ -268,9 +268,9 @@ namespace Dreamscape {
             Cutscene = new CutsceneManager();
 
             //Boot scene.
+            BootScene boot = new BootScene();
+            Scenes.Add("Boot", boot);
             if ((!DebugMode && !DisableBootscreen) || ForceBootscreen) {
-                BootScene boot = new BootScene();
-                Scenes.Add("Boot", boot);
                 ChangeScene("Boot");
             } else {
                 ChangeScene("Default");
